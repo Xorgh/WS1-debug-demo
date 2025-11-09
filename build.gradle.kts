@@ -1,9 +1,7 @@
-plugins {
-    id("java")
-}
 
-group = "com.tomgregory"
-version = "1.0-SNAPSHOT"
+plugins {
+    java
+}
 
 repositories {
     mavenCentral()
@@ -14,18 +12,12 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
 }
 
-tasks.getByName<Test>("test") {
-    useJUnitPlatform()
-}
-
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
+        languageVersion.set(JavaLanguageVersion.of(17)) // or 21 if you prefer
     }
 }
 
-tasks.named<Jar>("jar") {
-    manifest {
-        attributes["Main-Class"] = "com.tomgregory.BattleshipGame"
-    }
+tasks.test {
+    useJUnitPlatform()
 }
